@@ -2,7 +2,10 @@
 #include "stdlib.h"
 #include "string.h"
 
-
+// Get user input for the menu choice and validate it.
+// It ensures the input is an integer between 1 and 4.
+// If the input is invalid, it prompts the user to try again.
+// This function returns the valid choice as an integer.
 int getUserChoice() {
     char input[32];
     int choice;
@@ -30,6 +33,9 @@ int getUserChoice() {
     }
 }
 
+// Function to read tasks from the file and print them to the console.
+// It reads each line, extracts the ID and task description, and prints them in a formatted way.
+// If the file cannot be opened, it prints an error message.
 int readFile(){
         FILE *file = fopen("tasks.json", "r");
         if (file == NULL) {
@@ -50,6 +56,9 @@ int readFile(){
         return 0;
 }
 
+// Function to add a new task to the file.
+// It reads the last ID from the file, increments it, and appends a new task in JSON format.
+// If the file cannot be opened, it prints an error message.
 int addTask(){
         FILE *file = fopen("tasks.json", "r");
         int lastID = -1;
@@ -93,6 +102,9 @@ int addTask(){
         return 0;
 }
 
+// Function to delete a task from the file.
+// It prompts the user for the ID of the task to delete, searches for it in the file,
+// and removes it if found. If the task is not found, it prints an appropriate message.
 int deleteTask() {
         int id;
         printf("Enter the ID of the task to delete: ");
@@ -150,7 +162,8 @@ int deleteTask() {
         return 0;
 }
 
-
+// Main function to run the Todo List application.
+// It initializes the tasks file, displays the menu, and handles user choices for reading, adding, and deleting tasks.
 int main() {
         FILE *file = fopen("tasks.json", "w");
         if (file == NULL) {
