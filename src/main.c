@@ -10,7 +10,7 @@ int getUserChoice() {
     char input[32];
     int choice;
     while (1) {
-        printf("Enter your choice (1-4): ");
+        printf("Enter your choice (1-5): ");
         if (fgets(input, sizeof(input), stdin) == NULL) {
             printf("Input error. Try again.\n");
             continue;
@@ -22,7 +22,7 @@ int getUserChoice() {
         // Validate integer input
         char extra;
         if (sscanf(input, "%d %c", &choice, &extra) == 1) {
-            if (choice >= 1 && choice <= 4) {
+            if (choice >= 1 && choice <= 5) {
                 return choice;
             } else {
                 printf("Please enter a number between 1 and 4.\n");
@@ -162,22 +162,36 @@ int deleteTask() {
         return 0;
 }
 
-// Main function to run the Todo List application.
-// It initializes the tasks file, displays the menu, and handles user choices for reading, adding, and deleting tasks.
-int main() {
+int createTasksFile(){
         FILE *file = fopen("tasks.json", "w");
         if (file == NULL) {
                 perror("Error opening file");
                 return 1;
         }
-        fclose(file);
+
+	printf("File Created\n");
+
+	return 0;
+
+}
+
+// Main function to run the Todo List application.
+// It initializes the tasks file, displays the menu, and handles user choices for reading, adding, and deleting tasks.
+int main() {
+//        FILE *file = fopen("tasks.json", "w");
+//        if (file == NULL) {
+//                perror("Error opening file");
+//                return 1;
+//        }
+//        fclose(file);
 
         while (1) {
                 printf("What would you like to do?\n");
                 printf("1. Read tasks\n");
                 printf("2. Add task\n");
                 printf("3. Delete task\n");
-                printf("4. Exit\n");
+                printf("4. Create/wipe tasks file\n");
+                printf("5. Exit\n");
 
                 int choice = getUserChoice();
 
@@ -200,7 +214,12 @@ int main() {
                                 deleteTask();
                                 break;
 
-                        case 4:
+			case 4:
+				printf("Creating File\n");
+				createTasksFile();
+				break;
+
+                        case 5:
                                 printf("Exiting the program.\n");
                                 // Exit's the program with status code 0.
                                 exit(0);
