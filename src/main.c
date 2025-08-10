@@ -162,6 +162,10 @@ int deleteTask() {
         return 0;
 }
 
+// Creates a new tasks file or wipes the existing one.
+// It opens the file in write mode, which clears its contents if it already exists.
+// If the file cannot be opened, it prints an error message.
+// I do this because if i don't the file won't exist and it will break everything. Life's a bitch.
 int createTasksFile(){
         FILE *file = fopen("tasks.json", "w");
         if (file == NULL) {
@@ -169,7 +173,7 @@ int createTasksFile(){
                 return 1;
         }
 
-	printf("File Created\n");
+	printf("File Created!\n");
 
 	return 0;
 
@@ -178,13 +182,6 @@ int createTasksFile(){
 // Main function to run the Todo List application.
 // It initializes the tasks file, displays the menu, and handles user choices for reading, adding, and deleting tasks.
 int main() {
-//        FILE *file = fopen("tasks.json", "w");
-//        if (file == NULL) {
-//                perror("Error opening file");
-//                return 1;
-//        }
-//        fclose(file);
-
         while (1) {
                 printf("What would you like to do?\n");
                 printf("1. Read tasks\n");
@@ -215,7 +212,7 @@ int main() {
                                 break;
 
 			case 4:
-				printf("Creating File\n");
+				printf("Creating File...\n");
 				createTasksFile();
 				break;
 
